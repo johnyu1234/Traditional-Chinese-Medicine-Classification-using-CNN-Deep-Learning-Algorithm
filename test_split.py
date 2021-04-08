@@ -1,9 +1,37 @@
 import os
 import random
+import shutil
 location = r"B:\data\data\dataset-Traditional-Medicine\train"
 location_3 = r"B:\data\data\dataset-Traditional-Medicine\folding"
 location_2 = r"B:\data\data\dataset-Traditional-Medicine\test"
 location_4= r"B:\data\data\dataset-Traditional-Medicine\folding\ori_data"
+def create_proper_data(location):
+    list_fold = ["fold1","fold2","fold3","fold4","fold5"]
+    list = ["train_1","train_2","train_3","train_4","train_5"]
+    counter = 0
+    for i in list:
+        #final=location+"\\"+i
+        counter += 1
+        for j in range(5):
+
+            if(j+1) == counter :
+                print("val")
+            else:
+                for root, _, files in os.walk(location+"\\"+list_fold[j]):
+                    print(os.path.basename(root))
+                    print(root)
+                    final = root.replace(list_fold[j],i)
+                    print(final)
+                    for file in files:
+                        print(file)
+                        shutil.copyfile(root+"\\"+file, final+"\\"+file)
+
+def create_folder_2(location):
+    list = ["train_1","train_2","train_3","train_4","train_5"]
+    for j in range(5):
+        for i in range(41):
+            if not os.path.exists(location + "\\" + "\\" + list[j] + "\\X" + str(i + 1)):
+                os.makedirs(location + "\\" + "\\" + list[j] + "\\X" + str(i + 1))
 def create_folder(location):
     list = ["fold1","fold2","fold3","fold4","fold5"]
     for j in range(5):
@@ -47,4 +75,6 @@ def main(file_dir):
                 print(file)
 #create_folder(location_3)
 #main(location)
-fold_cross_val(location_4)
+#fold_cross_val(location_4)
+#create_folder_2(location_3)
+create_proper_data(location_3)
