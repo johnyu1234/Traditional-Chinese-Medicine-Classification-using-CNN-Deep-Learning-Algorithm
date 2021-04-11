@@ -5,9 +5,9 @@ location = r"B:\data\data\dataset-Traditional-Medicine\train"
 location_3 = r"B:\data\data\dataset-Traditional-Medicine\folding"
 location_2 = r"B:\data\data\dataset-Traditional-Medicine\test"
 location_4= r"B:\data\data\dataset-Traditional-Medicine\folding\ori_data"
+list_fold = ["fold1", "fold2", "fold3", "fold4", "fold5"]
+list_train = ["train_1", "train_2", "train_3", "train_4", "train_5"]
 def create_proper_data(location):
-    list_fold = ["fold1","fold2","fold3","fold4","fold5"]
-    list = ["train_1","train_2","train_3","train_4","train_5"]
     counter = 0
     for i in list:
         #final=location+"\\"+i
@@ -25,16 +25,12 @@ def create_proper_data(location):
                     for file in files:
                         print(file)
                         shutil.copyfile(root+"\\"+file, final+"\\"+file)
-
-def create_folder_2(location):
-    list = ["train_1","train_2","train_3","train_4","train_5"]
-    for j in range(5):
+def create_folder_only(location):
         for i in range(41):
-            if not os.path.exists(location + "\\" + "\\" + list[j] + "\\X" + str(i + 1)):
-                os.makedirs(location + "\\" + "\\" + list[j] + "\\X" + str(i + 1))
-def create_folder(location):
-    list = ["fold1","fold2","fold3","fold4","fold5"]
-    for j in range(5):
+            if not os.path.exists(location+"\\"+"\\X"+str(i+1)):
+                os.makedirs(location+"\\"+"\\"+"\\X"+str(i+1))
+def create_folder(location,list):
+    for j in range(list):
         for i in range(41):
             if not os.path.exists(location+"\\"+"\\"+list[j]+"\\X"+str(i+1)):
                 os.makedirs(location+"\\"+"\\"+list[j]+"\\X"+str(i+1))
@@ -68,16 +64,26 @@ def fold_cross_val(file_dir):
 def main(file_dir):
     for root, _, files in os.walk(file_dir):
         print(os.path.basename(root))
-        new_root = root.replace("train", "test")
         for file in files:
-            if random.randint(1, 10) == 2:
+            val = random.randint(1, 10)
+            if val <= 2:
+                new_root = root.replace("train", "test")
                 os.rename(root + "\\" + file, new_root + "\\" + file)
                 print(file)
+            elif 2 <val <=4:
+                new_root = root.replace("train", "val")
+                os.rename(root + "\\" + file, new_root + "\\" + file)
+                print(file)
+
+
 #create_folder(location_3)
 #main(location)
 #fold_cross_val(location_4)
 #create_folder_2(location_3)
-create_proper_data(location_3)
+#create_proper_data(location_3)
+#list=list()
+#create_folder_only(r"B:\File\data_TCM\val")
 
+main(r"B:\File\data_TCM\train")
 
 # to test push
