@@ -74,6 +74,14 @@ def main(file_dir):
                 new_root = root.replace("train", "val")
                 os.rename(root + "\\" + file, new_root + "\\" + file)
                 print(file)
+def object_detect(file_dir):
+    for root, _, files in os.walk(file_dir):
+        print(os.path.basename(root))
+        for file in files:
+                new_root = root.replace("test", "object_detect")
+                shutil.copyfile(root + "\\" + file, new_root+ "\\" + file)
+                print(file)
+                break
 
 
 #create_folder(location_3)
@@ -82,8 +90,8 @@ def main(file_dir):
 #create_folder_2(location_3)
 #create_proper_data(location_3)
 #list=list()
-#create_folder_only(r"B:\File\data_TCM\val")
+create_folder_only(r"B:\data\data\dataset-Traditional-Medicine\11_4\object_detect")
 
-main(r"B:\File\data_TCM\train")
-
+#main(r"B:\File\data_TCM\train")
+object_detect(r"B:\data\data\dataset-Traditional-Medicine\11_4\test")
 # to test push
