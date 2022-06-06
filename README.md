@@ -64,11 +64,11 @@ Process might take a while before the app can run on the device.
 
 
 ## Server
-Our server is run through locally on our laptop.
+- Our server is run through locally on our laptop.
 ###### for Windows
-you would need to deactivate your firewall in order to allow the mobile application to access the server
+- you would need to deactivate your firewall in order to allow the mobile application to access the server
 ##### for MacOs/Linux
-no firewall deactivation neeeded
+- no firewall deactivation neeeded
 ##### Running the server
 1. in order to run the server, you would need to download all the dependencies/libaries that has been included in the python file (Tcm_api.py)
 2. make sure you are connected with the same wifi with as the mobile application  
